@@ -1,0 +1,33 @@
+{
+  "task_type": "integration_test",
+  "has_context": true,
+  "is_authenticated": true,
+  "username": "Batman",
+  "show_categories": true,
+  "categories": [
+    "Category1",
+    "Category2"
+  ],
+  "name": "World",
+  "show_items": true,
+  "items": [
+    {
+      "name": "Item1",
+      "value": 100
+    },
+    {
+      "name": "Item2",
+      "value": 200
+    }
+  ],
+  "documents": [
+    {
+      "title": "Sample Document"
+    },
+    {
+      "title": "Another Document"
+    }
+  ],
+  "format_json": true,
+  "query": "What is the title of the first document?"
+}
