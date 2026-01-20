@@ -52,7 +52,7 @@ TBD
 
 ## Documentation
 
-Full documentation is available at [https://banyango.github.io/pmd](https://yourusername.github.io/pmd)
+Full documentation is available at [https://banyango.github.io/pmd/latest](https://www.banyango.com/PMD/latest/)
 
 ## Development
 
