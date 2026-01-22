@@ -481,6 +481,31 @@ class TestPmdIntegration:
 
         assert result == expected, f"Expected:\n{expected}\nGot:\n{result}"
 
+    @pytest.mark.parametrize(
+        "is_authenticated,is_admin,expected",
+        [
+            (True, True, "Welcome back\nYou have administrative privileges.\n"),
+            (True, False, "Welcome back\nYou are a regular user.\n"),
+            (False, False, ""),
+        ],
+    )
+    def test_nested_conditionals(self, parser, files_dir, is_authenticated, is_admin, expected):
+        """Test nested conditionals in nested_conditional.pmd."""
+        template_file = files_dir / "nested_conditional.pmd"
+        with open(template_file, encoding="utf-8") as f:
+            content = f.read()
+
+        # Parse
+        metadata, nodes = parser.parse(content)
+
+        # Render with context
+        renderer = PmdRenderer(
+            context={"is_authenticated": is_authenticated, "is_admin": is_admin}
+        )
+        result = renderer.render(nodes)
+
+        assert result == expected, f"Expected:\n{expected}\nGot:\n{result}"
+
     def test_nested_includes_subdir(self, parser, files_dir):
         """Test include.pmd with includes in a subdirectory."""
         template_file = files_dir / "nested_includes.pmd"
