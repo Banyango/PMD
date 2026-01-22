@@ -5,7 +5,7 @@
 
 Margarita is a lightweight markup language and Python library for writing, composing, and rendering structured LLM prompts.
 
-Margarita targets prompt engineering workflows where clarity, versioning, and correctness matter.
+Margarita extends Markdown with templating features like variables, conditionals, loops, and includes, making it easy to create dynamic prompts for large language models (LLMs).
 
 | FOR NOW! CLI tool is WIP you will need to download the source and install it locally to use the `margarita` command. |
 
