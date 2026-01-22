@@ -849,8 +849,8 @@
 <h1 id="basic-python-usage">Basic Python Usage<a class="headerlink" href="#basic-python-usage" title="Permanent link">&para;</a></h1>
 <p>First, import the necessary components:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 </code></pre></div>
 <p>Render a template programmatically:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define your template</span>
@@ -868,11 +868,11 @@
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="c1"># Parse the template</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">metadata</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
 <span class="c1"># Create a renderer with context</span>
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="p">{</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="p">{</span>
     <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Summarize the key points&quot;</span><span class="p">,</span>
     <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="s2">&quot;User is researching AI agents&quot;</span>
 <span class="p">})</span>

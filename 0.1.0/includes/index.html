@@ -1473,16 +1473,16 @@
 <p>MARGARITA's include functionality allows you to compose templates from reusable snippets, making it easy to build modular, maintainable prompt libraries. This page covers how to use includes programmatically through the Python API.</p>
 <h2 id="basic-include-usage">Basic Include Usage<a class="headerlink" href="#basic-include-usage" title="Permanent link">&para;</a></h2>
 <h3 id="setting-up-the-renderer">Setting Up the Renderer<a class="headerlink" href="#setting-up-the-renderer" title="Permanent link">&para;</a></h3>
-<p>The key to using includes is setting the <code>base_path</code> parameter when creating a <code>MargaritaRenderer</code>. This tells MARGARITA where to resolve relative include paths:</p>
+<p>The key to using includes is setting the <code>base_path</code> parameter when creating a <code>Renderer</code>. This tells MARGARITA where to resolve relative include paths:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 <span class="c1"># Define base path for includes</span>
 <span class="n">template_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>
 
 <span class="c1"># Parse your main template</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">template_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{</span><span class="si">% i</span><span class="s2">nclude &quot;header.marg&quot; %}</span>
 
@@ -1494,7 +1494,7 @@
 <span class="n">metadata</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template_content</span><span class="p">)</span>
 
 <span class="c1"># Create renderer with base_path</span>
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;app_name&quot;</span><span class="p">:</span> <span class="s2">&quot;MyApp&quot;</span><span class="p">},</span>
     <span class="n">base_path</span><span class="o">=</span><span class="n">template_dir</span>
 <span class="p">)</span>
@@ -1524,8 +1524,8 @@ Timestamp: {{timestamp}}
 </code></pre></div></p>
 <h3 id="using-the-snippets">Using the Snippets<a class="headerlink" href="#using-the-snippets" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 <span class="c1"># Main template that composes snippets</span>
 <span class="n">main_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -1541,10 +1541,10 @@ Timestamp: {{timestamp}}
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="c1"># Parse and render</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">main_template</span><span class="p">)</span>
 
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;technical expert&quot;</span><span class="p">,</span>
         <span class="s2">&quot;user_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
@@ -1563,12 +1563,12 @@ Timestamp: {{timestamp}}
 </code></pre></div>
 <h2 id="dynamic-include-loading">Dynamic Include Loading<a class="headerlink" href="#dynamic-include-loading" title="Permanent link">&para;</a></h2>
 <h3 id="margaritacomposer">MargaritaComposer<a class="headerlink" href="#margaritacomposer" title="Permanent link">&para;</a></h3>
-<p>Include complex prompts dynamically using <code>MargaritaComposer</code>:</p>
+<p>Include complex prompts dynamically using <code>Composer</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.composer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaComposer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.composer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Composer</span>
 
 <span class="c1"># Usage</span>
-<span class="n">manager</span> <span class="o">=</span> <span class="n">MargaritaComposer</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">))</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">Composer</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">))</span>
 
 <span class="c1"># Compose a complex prompt from multiple snippets</span>
 <span class="n">prompt</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">compose_prompt</span><span class="p">(</span>
@@ -1589,7 +1589,9 @@ Timestamp: {{timestamp}}
 </code></pre></div>
 <h2 id="conditional-snippet-loading">Conditional Snippet Loading<a class="headerlink" href="#conditional-snippet-loading" title="Permanent link">&para;</a></h2>
 <h3 id="using-conditionals-with-includes">Using Conditionals with Includes<a class="headerlink" href="#using-conditionals-with-includes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Template with conditional includes</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
+<span class="c1"># Template with conditional includes</span>
 <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{</span><span class="si">% i</span><span class="s2">nclude &quot;snippets/system_role.marg&quot; %}</span>
 
@@ -1608,11 +1610,11 @@ Timestamp: {{timestamp}}
 <span class="s2">{</span><span class="si">% e</span><span class="s2">ndif %}</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
 <span class="c1"># Render with detailed mode</span>
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
         <span class="s2">&quot;use_examples&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -1653,15 +1655,15 @@ Timestamp: {{timestamp}}
 <p>Notice that even though <code>header_section.marg</code> is in the <code>snippets/</code> directory, it <strong>still uses <code>"snippets/system_role.marg"</code></strong> in its include statement, not just <code>"system_role.marg"</code>. This is because all paths are resolved from <code>base_path</code>.</p>
 <h3 id="example-nested-include-rendering">Example: Nested Include Rendering<a class="headerlink" href="#example-nested-include-rendering" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 <span class="c1"># Parse the main template</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;{</span><span class="si">% i</span><span class="s1">nclude &quot;snippets/complete_prompt.marg&quot; %}&#39;</span><span class="p">)</span>
 
 <span class="c1"># Set base_path to templates/</span>
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">},</span>
     <span class="n">base_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>
 <span class="p">)</span>
@@ -1692,10 +1694,10 @@ Timestamp: {{timestamp}}
 {% include &quot;atoms/title.marg&quot; %}
 </code></pre></div></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># All paths resolve from base_path, no matter how deep the nesting</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;{</span><span class="si">% i</span><span class="s1">nclude &quot;layouts/full_prompt.marg&quot; %}&#39;</span><span class="p">)</span>
 
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My Prompt&quot;</span><span class="p">},</span>
     <span class="n">base_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>
 <span class="p">)</span>
@@ -1732,17 +1734,17 @@ Timestamp: {{timestamp}}
 <h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
 <p>Always handle include errors gracefully:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">safe_render</span><span class="p">(</span><span class="n">template_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely render a template with error handling.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template_content</span><span class="p">)</span>
 
-        <span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">)</span>
+        <span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="n">base_path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -1819,7 +1821,7 @@ You are a {{role}} with {{expertise_level}} expertise in {{domain}}.
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">OptimizedRenderer</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span> <span class="o">=</span> <span class="n">template_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parsed_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -1833,13 +1835,13 @@ You are a {{role}} with {{expertise_level}} expertise in {{domain}}.
 
     <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">(</span><span class="n">template_content</span><span class="p">)</span>
-        <span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span><span class="p">)</span>
+        <span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">base_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="real-world-example-multi-agent-system">Real-World Example: Multi-Agent System<a class="headerlink" href="#real-world-example-multi-agent-system" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AgentPromptBuilder</span><span class="p">:</span>
@@ -1847,7 +1849,7 @@ You are a {{role}} with {{expertise_level}} expertise in {{domain}}.
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">snippets_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">snippets_dir</span> <span class="o">=</span> <span class="n">snippets_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">build_agent_prompt</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1888,7 +1890,7 @@ You are a {{role}} with {{expertise_level}} expertise in {{domain}}.
 
         <span class="c1"># Render</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
-        <span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+        <span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
             <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
             <span class="n">base_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">snippets_dir</span>
         <span class="p">)</span>

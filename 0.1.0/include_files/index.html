@@ -943,16 +943,16 @@ Content goes here using the same context.
 <h2 id="using-includes-in-python-api">Using Includes in Python API<a class="headerlink" href="#using-includes-in-python-api" title="Permanent link">&para;</a></h2>
 <p>When using MARGARITA programmatically, you must set the <code>base_path</code> when creating the renderer. <strong>All include paths are resolved relative to this base path</strong>, not relative to the file doing the including.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaParser</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MargaritaRenderer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">margarita.renderer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Renderer</span>
 
 <span class="c1"># Parse your template</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">MargaritaParser</span><span class="p">()</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
 <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;{</span><span class="si">% i</span><span class="s1">nclude &quot;header.marg&quot; %}</span><span class="se">\n\n</span><span class="s1">Main content here.&#39;</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
 <span class="c1"># Set base_path - all includes resolve from here</span>
-<span class="n">renderer</span> <span class="o">=</span> <span class="n">MargaritaRenderer</span><span class="p">(</span>
+<span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My Page&quot;</span><span class="p">},</span>
     <span class="n">base_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>  <span class="c1"># header.marg will be loaded from ./templates/header.marg</span>
 <span class="p">)</span>
