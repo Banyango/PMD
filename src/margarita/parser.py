@@ -183,7 +183,11 @@ class Parser:
         return nodes
 
     def _parse_text_block(self) -> str:
-        """Parse a text block delimited by << and >>."""
+        """Parse a text block delimited by << and >>.
+        
+        Text blocks can be single-line or multi-line. Content is extracted
+        with indentation relative to the opening << delimiter removed.
+        """
         indent, first_line = self.lines[self.pos]
         
         # Check if it's a single-line text block
@@ -191,10 +195,8 @@ class Parser:
             # Single line block
             content = first_line.strip()[2:-2].strip()
             self.pos += 1
-            # Process variables in the content
-            processed = self._process_text_variables(content)
             # Add newline after text block
-            return processed + '\n' if processed else processed
+            return content + '\n' if content else content
         
         # Multi-line block
         if not first_line.strip().startswith('<<'):
@@ -231,20 +233,8 @@ class Parser:
             self.pos += 1
         
         content = '\n'.join(content_lines)
-        # Process variables in the content
-        processed = self._process_text_variables(content)
         # Always add a trailing newline to text blocks to ensure proper spacing
         # Special case: if content_lines has content (even if empty strings), add newline
-        if processed or content_lines:
-            processed += '\n'
-        return processed
-
-    def _process_text_variables(self, text: str) -> str:
-        """Process variable syntax in text content.
-        
-        The ${var} syntax in text blocks is left as-is during parsing
-        and will be processed by the renderer during rendering phase.
-        This allows the parser to focus on structure while the renderer
-        handles variable substitution with the actual context values.
-        """
-        return text
+        if content or content_lines:
+            content += '\n'
+        return content

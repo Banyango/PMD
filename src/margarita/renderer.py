@@ -19,6 +19,11 @@ from margarita.parser import (
 )
 
 
+# Pattern for matching variable interpolation in text blocks
+# Matches ${word} or ${word.word.word} etc. with proper dotted notation
+VAR_PATTERN = re.compile(r'\$\{([\w]+(?:\.[\w]+)*)\}')
+
+
 class Renderer:
     def __init__(self, context: dict[str, Any] | None = None, base_path: Path | None = None):
         """Initialize the renderer with a context dictionary.
@@ -56,16 +61,13 @@ class Renderer:
         if isinstance(node, TextNode):
             # Process ${variable} syntax in text
             content = node.content
-            # Replace ${var} with actual values
-            # Pattern allows dotted notation like ${user.name}
+            # Replace ${var} with actual values using the compiled pattern
             def replace_var(match):
                 var_name = match.group(1)
                 value = self._get_variable_value(var_name)
                 return str(value) if value is not None else ""
             
-            # Use a more precise pattern to match valid variable names with optional dotted notation
-            # Pattern: ${word} or ${word.word} or ${word.word.word} etc.
-            content = re.sub(r'\$\{([\w]+(?:\.[\w]+)*)\}', replace_var, content)
+            content = VAR_PATTERN.sub(replace_var, content)
             return content
 
         elif isinstance(node, VariableNode):
