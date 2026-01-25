@@ -1,24 +1,44 @@
 @task: nested-structures
 
+// This is a comment - testing new comment syntax
+<<
+
 # Nested Conditionals and Loops
 
-{% if show_categories %}
-# Categories
+>>
 
-{% for category in categories %}
-## Category: {{category}}
+if show_categories:
+    <<
+    # Categories
 
-{% if show_items %}
-Items in this category:
-{% for item in items %}
-  - {{item}}
-{% endfor %}
-{% else %}
-No items to display.
-{% endif %}
+    >>
+    
+    for category in categories:
+        <<
+        ## Category: ${category}
 
-{% endfor %}
-{% endif %}
+        >>
+        
+        if show_items:
+            <<
+            Items in this category:
+            >>
+            for item in items:
+                <<
+                  - ${item}
+                >>
+            <<
+
+            >>
+        else:
+            <<
+            No items to display.
+
+            >>
+
+<<
 
 # End
+
+>>
 
