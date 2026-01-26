@@ -1,3 +1,19 @@
+# Release Notes - Margarita v0.2.0
+
+**Release Date:** January 25, 2026
+
+## 🎉 Overview
+
+Complete overhaul of the syntax.
+
+- Markdown is now contained within << and >> blocks.
+- Conditions follow indentation based scoping.
+- Loops follow indentation based scoping.
+- Includes now can take parameters. ala React. `[[ ComponentName prop1="value1" prop2="value2" ]]`
+- Variables are now defined with ${varname} syntax.
+- Metadata blocks are now defined with --- yaml --- syntax.
+
+
 # Release Notes - Margarita v0.1.0
 
 **Release Date:** January 22, 2026
