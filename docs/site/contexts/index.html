@@ -857,7 +857,9 @@
 </code></pre></div>
 <p>Rendered result</p>
 <p>Given the following template:</p>
-<div class="highlight"><pre><span></span><code>Hello, {{name}}! (id={{user.id}}, active={{user.active}})
+<div class="highlight"><pre><span></span><code>&lt;&lt;
+Hello, ${name}! (id=${user.id}, active=${user.active})
+&gt;&gt;
 </code></pre></div>
 <p>Rendering with the example context produces:</p>
 <div class="highlight"><pre><span></span><code>Hello, Batman! (id=42, active=True)

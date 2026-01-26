@@ -847,31 +847,34 @@
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
 <p>A minimal walkthrough to render your first MARGARITA template.</p>
 <ol>
-<li>Create a template file <code>greeting.marg</code>:</li>
+<li>Create a template file <code>greeting.mg</code>:</li>
 </ol>
-<div class="highlight"><pre><span></span><code>Hello, {{name}}!
+<div class="highlight"><pre><span></span><code>Hello, ${name}!
 </code></pre></div>
 <ol>
 <li>Provide a context (JSON) either inline or in a file <code>greeting.json</code>:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Batman&quot;</span><span class="p">}</span>
 </code></pre></div>
 <ol>
 <li>Render the template with the CLI:</li>
 </ol>
-<div class="highlight"><pre><span></span><code>margarita<span class="w"> </span>render<span class="w"> </span>greeting.marg<span class="w"> </span>-f<span class="w"> </span>greeting.json
+<div class="highlight"><pre><span></span><code>margarita<span class="w"> </span>render<span class="w"> </span>greeting.mg<span class="w"> </span>-f<span class="w"> </span>greeting.json
 </code></pre></div>
 <p>Rendered result</p>
 <p>Using the template and context above the output will be:</p>
-<div class="highlight"><pre><span></span><code>Hello, Alice!
+<div class="highlight"><pre><span></span><code>Hello, Batman!
 </code></pre></div>
 <p>Alternate options</p>
 <ul>
 <li>Pass context as a JSON string: <code>-c '{"name": "Bob"}'</code></li>
-<li>Render a directory of <code>.marg</code> files: <code>margarita render templates/ -o output/</code></li>
-<li>Inspect template metadata before rendering: <code>margarita render template.marg --show-metadata</code></li>
+<li>Render a directory of <code>.mg</code> files: <code>margarita render templates/ -o output/</code></li>
+<li>Inspect template metadata before rendering: <code>margarita render template.mg --show-metadata</code></li>
 </ul>
-<p>Tip: When rendering a single file, MARGARITA will auto-detect a same-name <code>.json</code> file (e.g. <code>greeting.json</code>) if no context is supplied.</p>
+<blockquote>
+<p>Tip: When rendering a single file, MARGARITA will auto-detect a same-name <code>.json</code> file (e.g. <code>greeting.json</code>) if no context is supplied.
+</p>
+</blockquote>
 
 
 

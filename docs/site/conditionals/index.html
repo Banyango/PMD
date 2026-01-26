@@ -849,11 +849,10 @@
 <h1 id="conditionals">Conditionals<a class="headerlink" href="#conditionals" title="Permanent link">&para;</a></h1>
 <p>Use conditionals to render sections conditionally based on context values.</p>
 <p>Syntax</p>
-<div class="highlight"><pre><span></span><code>{% if subscribed %}
-Thanks for subscribing, {{name}}!
-{% else %}
-Please consider subscribing.
-{% endif %}
+<div class="highlight"><pre><span></span><code>if subscribed:
+    &lt;&lt; Thanks for subscribing, ${name}! &gt;&gt;
+else:
+    &lt;&lt;&lt; Please consider subscribing. &gt;&gt;
 </code></pre></div>
 <p>Rendered results</p>
 <ul>

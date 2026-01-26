@@ -837,17 +837,17 @@
 <p>Key features</p>
 <ul>
 <li>Simple variable substitution with JSON contexts</li>
-<li>Template metadata for task information (e.g. <code>@task</code>, <code>@owner</code>)</li>
+<li>Template metadata for task information</li>
 <li>Conditionals and loops for dynamic sections</li>
 <li>Include files to compose templates across multiple fragments</li>
 <li>CLI for rendering and metadata inspection (<code>margarita render</code>, <code>margarita metadata</code>)</li>
 </ul>
 <p>Quick example</p>
-<p>Create <code>hello.marg</code> containing:</p>
+<p>Create <code>hello.mg</code> containing:</p>
 <div class="highlight"><pre><span></span><code>Hello, {{name}}!
 </code></pre></div>
 <p>Render with a JSON context:</p>
-<div class="highlight"><pre><span></span><code>margarita<span class="w"> </span>render<span class="w"> </span>hello.marg<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;World&quot;}&#39;</span>
+<div class="highlight"><pre><span></span><code>margarita<span class="w"> </span>render<span class="w"> </span>hello.mg<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;World&quot;}&#39;</span>
 </code></pre></div>
 <p>Rendered result</p>
 <p>Given the template above and the context <code>{"name": "World"}</code>, the rendered output will be:</p>

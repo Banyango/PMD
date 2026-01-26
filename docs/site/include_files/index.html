@@ -914,20 +914,21 @@
 
 
 <h1 id="include-files">Include Files<a class="headerlink" href="#include-files" title="Permanent link">&para;</a></h1>
-<p>Reuse template fragments using <code>{% include "file.marg" %}</code>. Includes are resolved relative to the including template's directory.</p>
+<p>Reuse template fragments using <code>[[ file ]]</code>. Includes are resolved relative to the including template's directory.</p>
 <p>Example</p>
-<p><code>header.marg</code>:</p>
-<div class="highlight"><pre><span></span><code>This is the header content.
+<div class="highlight"><pre><span></span><code>// filename: header.mg
+&lt;&lt;This is the header content.&gt;&gt;
 </code></pre></div>
-<p><code>page.marg</code>:</p>
-<div class="highlight"><pre><span></span><code>{% include &quot;header.marg&quot; %}
-
+<div class="highlight"><pre><span></span><code>// filename: page.mg
+[[ header ]]
+&lt;&lt;
 # Page Title
 
 Content goes here using the same context.
+&gt;&gt;
 </code></pre></div>
 <p>Rendered result</p>
-<p>When rendering <code>page.marg</code>, the output will include the header content followed by the page body:</p>
+<p>When rendering <code>page.mg</code>, the output will include the header content followed by the page body:</p>
 <div class="highlight"><pre><span></span><code>This is the header content.
 
 # Page Title
@@ -948,20 +949,19 @@ Content goes here using the same context.
 
 <span class="c1"># Parse your template</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
-<span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;{</span><span class="si">% i</span><span class="s1">nclude &quot;header.marg&quot; %}</span><span class="se">\n\n</span><span class="s1">Main content here.&#39;</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;[[ header ]]</span><span class="se">\n\n</span><span class="s1">Main content here.&#39;</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 
 <span class="c1"># Set base_path - all includes resolve from here</span>
 <span class="n">renderer</span> <span class="o">=</span> <span class="n">Renderer</span><span class="p">(</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My Page&quot;</span><span class="p">},</span>
-    <span class="n">base_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>  <span class="c1"># header.marg will be loaded from ./templates/header.marg</span>
+    <span class="n">base_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./templates&quot;</span><span class="p">)</span>  <span class="c1"># header.mg will be loaded from ./templates/header.mg</span>
 <span class="p">)</span>
 
 <span class="n">output</span> <span class="o">=</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Important</strong>: Even in nested includes, all paths are from <code>base_path</code>. If <code>snippets/section.marg</code> includes another file, it must use the full path from <code>base_path</code>:</p>
-<div class="highlight"><pre><span></span><code>{# Inside templates/snippets/section.marg #}
-{% include &quot;snippets/subsection.marg&quot; %}  {# NOT just &quot;subsection.marg&quot; #}
+<p><strong>Important</strong>: Even in nested includes, all paths are from <code>base_path</code>. If <code>snippets/section.mg</code> includes another file, it must use the full path from <code>base_path</code>:</p>
+<div class="highlight"><pre><span></span><code>[[ snippets/subsection ]]  {# NOT just &quot;subsection&quot; #}
 </code></pre></div>
 <p>See the <a href="../includes/">Using Includes</a> page for comprehensive examples and patterns.</p>
 <p>Tip: Use includes for headers, footers, and small shared components to keep templates DRY and maintainable.</p>

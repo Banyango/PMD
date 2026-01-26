@@ -849,11 +849,11 @@
 <h1 id="loops">Loops<a class="headerlink" href="#loops" title="Permanent link">&para;</a></h1>
 <p>Render lists and repeat sections using <code>for</code> loops.</p>
 <p>Syntax</p>
-<div class="highlight"><pre><span></span><code># Items
-
-{% for item in items %}
-- {{item}}
-{% endfor %}
+<div class="highlight"><pre><span></span><code>&lt;&lt; # Items &gt;&gt;
+for item in items
+    &lt;&lt;
+    - {{item}}
+    &gt;&gt;
 </code></pre></div>
 <p>Example context</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cherry&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>

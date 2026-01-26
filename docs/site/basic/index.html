@@ -855,16 +855,32 @@
 <p>Render a template programmatically:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define your template</span>
 <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;&lt;</span>
 <span class="s2">You are a helpful assistant.</span>
 
-<span class="s2">Task: {{task}}</span>
+<span class="s2">### This is markdown like syntax and supports markdown features.</span>
+<span class="s2">I&#39;m a list of things:</span>
+<span class="s2">- Item 1</span>
+<span class="s2">- Item 2</span>
+<span class="s2">- Item 3</span>
 
-<span class="s2">{</span><span class="si">% i</span><span class="s2">f context %}</span>
-<span class="s2">Context:</span>
-<span class="s2">{{context}}</span>
-<span class="s2">{</span><span class="si">% e</span><span class="s2">ndif %}</span>
+<span class="s2">You can insert variables with the dollar sign</span>
+<span class="s2">Task: $</span><span class="si">{task}</span>
+<span class="s2">&gt;&gt;</span>
 
-<span class="s2">Please provide a detailed response.</span>
+<span class="s2">&lt;&lt; Markdown can be in a single line like this too &gt;&gt;</span>
+
+<span class="s2">// Comments are supported like this and ignored during rendering</span>
+<span class="s2">// Conditional blocks are supported</span>
+<span class="s2">if context:</span>
+<span class="s2">    &lt;&lt;</span>
+<span class="s2">    Context:</span>
+<span class="s2">        $</span><span class="si">{context}</span>
+<span class="s2">    &gt;&gt;</span>
+
+<span class="s2">// Loops are supported</span>
+<span class="s2">for item in items:</span>
+<span class="s2">    &lt;&lt; Item=$</span><span class="si">{item}</span><span class="s2"> &gt;&gt;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="c1"># Parse the template</span>
