@@ -95,17 +95,16 @@ jobs:
 
       - id: extract_version
         name: Extract version from tag
-        shell: bash
         run: |
-          version=${GITHUB_REF#refs/tags/}
-          version=${version#v}
-          echo "version=$version" >> $GITHUB_OUTPUT
+          $ref = $env:GITHUB_REF
+          $version = $ref -replace '^refs/tags/', ''
+          $version = $version -replace '^v', ''
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "version=$version"
 
       - name: Build exe
-        shell: bash
         run: |
-          EXE_NAME="margarita-windows-${{ steps.extract_version.outputs.version }}"
-          pyinstaller --onefile src/margarita/cli.py --name "$EXE_NAME"
+          $EXE_NAME = "margarita-windows-${{ steps.extract_version.outputs.version }}"
+          uv run pyinstaller --onefile src/margarita/cli.py --name $EXE_NAME
 
       - uses: actions/upload-artifact@v4
         with:
