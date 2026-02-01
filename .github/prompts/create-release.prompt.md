@@ -21,6 +21,7 @@
 
 4. run mike to create a new versioned docs site:
    ```bash
+   cd docs
    uv run mike deploy v<new_version> latest --update-aliases
    ```
 5. Update the version number in all the install scripts

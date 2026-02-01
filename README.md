@@ -9,7 +9,6 @@ It renders out to Markdown format by default so you can use this anywhere Markdo
 
 Margarita extends Markdown with templating features like variables, conditionals, loops, and includes, making it easy to create dynamic prompts for large language models (LLMs).
 
-| FOR NOW! CLI tool is WIP you will need to download the source and install it locally to use the `margarita` command. |
 
 ## Features
 
@@ -18,9 +17,24 @@ Margarita extends Markdown with templating features like variables, conditionals
 - 🎯 Static-first — templates are validated before execution
 - 📦 Metadata — version, and provide metadata alongside your prompts.
 
-# Installing
+# Installation
 
+Run the following command for your platform to install MARGARITA:
 
+Linux:
+```sh
+curl -fsSL https://raw.githubusercontent.com/Banyango/margarita/main/install-linux.sh | bash -s -- --option
+```
+
+MacOS:
+```sh
+curl -fsSL https://raw.githubusercontent.com/Banyango/margarita/main/install-macos.sh | bash -s -- --option
+```
+
+Windows (PowerShell):
+```powershell
+iwr -useb https://raw.githubusercontent.com/Banyango/margarita/main/install-windows.ps1 | iex
+```
 
 
 ## Get Started
@@ -30,7 +44,7 @@ Here's a Hello World example. helloworld.mg contains the template, and helloworl
 ```markdown:helloworld.mg
 // file:helloworld.mg
 <<
-Hello, {{name}}!
+Hello, ${name}!
 Welcome to Margarita templating.
 >>
 ```
@@ -63,7 +77,7 @@ Welcome to Margarita templating.
 if is_admin:
     <<Welcome, Admin ${name}>>
 else:
-    <<Welcome, User {{name}}!>>
+    <<Welcome, User ${name}!>>
 ```
 
 ## Includes
@@ -85,6 +99,7 @@ Output the response in the following JSON format:
 
 ```margarita
 // file:include_example.mg
+
 [[ role ]]
 
 if output_json:
@@ -96,7 +111,9 @@ You can pass context variables to your templates to make them dynamic.
 
 ```margarita
 // file:role.mg
-You are a ${ type } AI assistant.
+<<
+You are a ${type} AI assistant.
+>>
 ```
 
 ```margarita
@@ -116,7 +133,7 @@ version: "1.0"
 author: "Batman"
 ---
 <<
-Hello, {{name}}!
+Hello, ${name}!
 Welcome to Margarita templating.
 >>
 ```
@@ -138,16 +155,18 @@ from margarita.parser import Parser
 from margarita.renderer import Renderer
 
 template = """
+<<
 You are a helpful assistant.
 
-Task: {{task}}
+Task: ${task}
+>>
+if context:
+    <<
+    Context:
+        ${context}
+    >>
 
-{% if context %}
-Context:
-{{context}}
-{% endif %}
-
-Please provide a detailed response.
+<< Please provide a detailed response. >>
 """
 
 # Parse the template
@@ -201,30 +220,24 @@ This project uses [uv](https://github.com/astral-sh/uv) for dependency managemen
 ### Setup Development Environment
 
 ```bash
-uv sync # Install dependencies
+make install
 ```
 
 ### Running Tests
 
 ```bash
 # Run tests with pytest
-uv run pytest
-
-# Run tests with coverage
-uv run pytest --cov=margarita --cov-report=html
+make test
 ```
 
 ### Code Quality
 
 ```bash
 # Format code with ruff
-uv run ruff format .
+make format
 
-# Lint code
-uv run ruff check .
-
-# Type checking with mypy
-uv run mypy src/margarita
+# Lint code and check for issues
+make lint
 ```
 
 ### Building the Package
