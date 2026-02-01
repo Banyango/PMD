@@ -1,3 +1,12 @@
+# Release Notes - Margarita v0.3.3
+
+**Release Date:** January 31, 2026
+
+## 🎉 Overview
+
+This release contains minor fixes and updates to the installer scripts and packaging metadata.
+
+
 # Release Notes - Margarita v0.3.2
 
 **Release Date:** January 31, 2026
@@ -150,4 +159,3 @@ Thank you to all early adopters and contributors who helped shape this initial r
 ---
 
 **Full Changelog**: https://github.com/Banyango/margarita/blob/main/CHANGELOG.md
-

@@ -5,8 +5,8 @@
 #   .\install-windows.ps1 -Repository "owner/repo" [-Asset "asset-name-or-url"]
 # Examples:
 #   .\install-windows.ps1 -Repository "Banyango/margarita"
-#   .\install-windows.ps1 -Repository "Banyango/margarita" -Asset "margarita-windows-0.3.2.exe"
-#   .\install-windows.ps1 -Repository "Banyango/margarita" -Asset "https://github.com/owner/repo/releases/download/v0.3.2/margarita-windows-0.3.2.exe"
+#   .\install-windows.ps1 -Repository "Banyango/margarita" -Asset "margarita-windows-0.3.3.exe"
+#   .\install-windows.ps1 -Repository "Banyango/margarita" -Asset "https://github.com/owner/repo/releases/download/v0.3.3/margarita-windows-0.3.3.exe"
 
 param(
   [string]$Repository = $env:GITHUB_REPOSITORY,
@@ -14,7 +14,7 @@ param(
 )
 
 # Manual version variable - update before running if you want a different release
-$VERSION = '0.3.2'
+$VERSION = '0.3.3'
 
 function Get-Repo($repo) {
   if ($repo) { return $repo }

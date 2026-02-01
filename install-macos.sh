@@ -7,10 +7,10 @@ set -euo pipefail
 #   bash install-macos.sh owner/repo [asset-url-or-name]
 # Examples:
 #   bash install-macos.sh Banyango/margarita
-#   bash install-macos.sh Banyango/margarita margarita-macos-0.3.2
-#   bash install-macos.sh Banyango/margarita https://github.com/owner/repo/releases/download/v0.3.2/margarita-macos-0.3.2
+#   bash install-macos.sh Banyango/margarita margarita-macos-0.3.3
+#   bash install-macos.sh Banyango/margarita https://github.com/owner/repo/releases/download/v0.3.3/margarita-macos-0.3.3
 
-VERSION=0.3.2
+VERSION=0.3.3
 REPO=${1:-${GITHUB_REPOSITORY:-}}
 ASSET_ARG=${2:-}
 

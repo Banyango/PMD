@@ -1,3 +1,6 @@
+--description: Create a release plan for the Margarita project
+--title: Release Plan for Margarita
+
 # Release plan for Margarita
 
 1. Make sure that all tests are passing format an linting are run
